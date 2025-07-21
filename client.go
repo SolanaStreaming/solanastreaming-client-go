@@ -29,19 +29,14 @@ type Client struct {
 	receivers  map[receiver]chan *wireMessage
 }
 
-// type Options struct {
-// 	ReconnectOnErr bool
-// 	Host 		 string
-// 	Logger 	 *logrus.Logger
-// 	LogLevel logrus.Level
-// }
-
 // New creates a new client instance.
 func New(apiKey string) *Client {
+	logger := logrus.New()
+	logger.SetLevel(logrus.PanicLevel) // default to panic level, can be changed later
 	return &Client{
 		apiKey:    apiKey,
 		host:      "wss://api.solanastreaming.com",
-		log:       logrus.New(),
+		log:       logger,
 		receivers: make(map[receiver]chan *wireMessage),
 	}
 }

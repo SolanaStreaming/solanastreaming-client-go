@@ -72,7 +72,7 @@ type Token struct {
 
 type TokenInfo struct {
 	Decimals        uint              `json:"decimals"`        // The number of decimal places for the token.
-	Supply          *big.Int          `json:"supply"`          // The total supply of the token, represented as a string to handle large numbers.
+	Supply          string            `json:"supply"`          // The total supply of the token, represented as a string to handle large numbers.
 	MetaData        *TokenMetaData    `json:"metadata"`        // Metadata about the token, such as name, symbol, and logo.
 	MintAuthority   *solana.PublicKey `json:"mintAuthority"`   // The authority that can mint new tokens. (nil for non-mintable tokens)
 	FreezeAuthority *solana.PublicKey `json:"freezeAuthority"` // The authority that can freeze token accounts. (nil for non-freezable tokens)
