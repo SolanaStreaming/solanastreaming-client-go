@@ -6,7 +6,8 @@ import (
 )
 
 type NewPairSubscribeParams struct {
-	IncludePumpfun bool `json:"include_pumpfun"`
+	IncludePumpfun          bool `json:"include_pumpfun"`
+	IncludeRaydiumLaunchlab bool `json:"include_raydium_launchlab"`
 }
 
 type NewPairsSubscription struct {
