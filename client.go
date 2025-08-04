@@ -62,6 +62,10 @@ func (o *Client) Connect(ctx context.Context) error {
 		var reason []byte
 		if resp != nil {
 			reason, _ = io.ReadAll(resp.Body)
+			resp.Body.Close()
+			if resp.StatusCode == http.StatusTooManyRequests {
+				err = errors.Wrapf(ErrRateLimitExceeded, err.Error())
+			}
 		}
 		o.log.Errorf("wss dial: %s %s", err.Error(), string(reason))
 		return errors.Wrap(err, string(reason))

@@ -39,6 +39,9 @@ func (c *Client) SubscribeNewPairs(ctx context.Context, params *NewPairSubscribe
 }
 
 func (s *NewPairsSubscription) Receive(ctx context.Context) (NewPairNotification, error) {
+	if s == nil {
+		return NewPairNotification{}, ErrNoSubscription
+	}
 	return receive[NewPairNotification](ctx, s.sub)
 }
 

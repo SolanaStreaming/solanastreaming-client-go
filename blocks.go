@@ -24,6 +24,9 @@ func (c *Client) SubscribeLatestBlock(ctx context.Context) (*LatestBlockSubscrip
 }
 
 func (s *LatestBlockSubscription) Receive(ctx context.Context) (LatestBlockNotification, error) {
+	if s == nil {
+		return LatestBlockNotification{}, ErrNoSubscription
+	}
 	return receive[LatestBlockNotification](ctx, s.sub)
 }
 

@@ -48,6 +48,9 @@ func (c *Client) SubscribeSwaps(ctx context.Context, params *SwapSubscribeParams
 }
 
 func (s *SwapsSubscription) Receive(ctx context.Context) (SwapNotification, error) {
+	if s == nil {
+		return SwapNotification{}, ErrNoSubscription
+	}
 	return receive[SwapNotification](ctx, s.sub)
 }
 

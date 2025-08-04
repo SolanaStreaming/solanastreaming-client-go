@@ -9,7 +9,9 @@ import (
 )
 
 var (
-	ErrConnectFirst = errors.New("connect first")
+	ErrConnectFirst      = errors.New("connect first")
+	ErrNoSubscription    = errors.New("no subscription")
+	ErrRateLimitExceeded = errors.New("rate limit exceeded")
 )
 
 type receiverType int
