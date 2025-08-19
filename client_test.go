@@ -15,7 +15,7 @@ func TestClient(t *testing.T) {
 	cli.Connect(ctx)
 	cli.SetLogLevel(logrus.DebugLevel)
 
-	sub, err := cli.SubscribeNewPairs(ctx, &NewPairSubscribeParams{IncludePumpfun: true})
+	sub, err := cli.SubscribeNewPairs(ctx, &NewPairSubscribeParams{IncludeLaunchpadTokens: true})
 	if err != nil {
 		t.Fatalf("failed to subscribe: %v", err)
 	}

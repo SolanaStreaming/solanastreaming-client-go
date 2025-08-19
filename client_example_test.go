@@ -16,7 +16,7 @@ func ExampleMain() {
 		return
 	}
 
-	pairsSub, err := cli.SubscribeNewPairs(ctx, &NewPairSubscribeParams{IncludePumpfun: true})
+	pairsSub, err := cli.SubscribeNewPairs(ctx, &NewPairSubscribeParams{IncludeLaunchpadTokens: true})
 	if err != nil {
 		log.Fatal(err)
 		return

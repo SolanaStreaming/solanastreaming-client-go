@@ -30,7 +30,7 @@ func main() {
     }
 
     pairsSub, err := cli.SubscribeNewPairs(ctx, &solanastreaming.NewPairSubscribeParams{
-        IncludePumpfun: true,
+        IncludeLaunchpadTokens: true,
     })
     if err != nil {
         log.Fatal(err)

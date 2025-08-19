@@ -6,8 +6,11 @@ import (
 )
 
 type NewPairSubscribeParams struct {
-	IncludePumpfun          bool `json:"include_pumpfun"`
-	IncludeRaydiumLaunchlab bool `json:"include_raydium_launchlab"`
+	// IncludeLaunchpadTokens Set to true to include all launchpad tokens including pumpfun and raydium_launchlab. false by default
+	IncludeLaunchpadTokens bool `json:"include_launchpad_tokens"`
+	// IncludePumpfun is a legacy parameter that should not be used.
+	// Deprecated: Use IncludeLaunchpadTokens instead.
+	IncludePumpfun bool `json:"include_pumpfun"` // Legacy, should not be used.
 }
 
 type NewPairsSubscription struct {
