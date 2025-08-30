@@ -30,6 +30,7 @@ func (s *LatestBlockSubscription) Receive(ctx context.Context) (LatestBlockNotif
 	return receive[LatestBlockNotification](ctx, s.sub)
 }
 
+// Unsubscribe from the latest block notifications. To prevent deadlocks, Avoid putting your Unsubscribe() call in your Receive() loop
 func (s *LatestBlockSubscription) Unsubscribe(ctx context.Context) error {
 	return unsubscribe[LatestBlockNotification](ctx, s.sub, "latestBlockUnsubscribe")
 }

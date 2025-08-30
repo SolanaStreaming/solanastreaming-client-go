@@ -54,10 +54,12 @@ func (s *SwapsSubscription) Receive(ctx context.Context) (SwapNotification, erro
 	return receive[SwapNotification](ctx, s.sub)
 }
 
+// Unsubscribe from the swap notifications. To prevent deadlocks, Avoid putting your Unsubscribe() call in your Receive() loop
 func (s *SwapsSubscription) Unsubscribe(ctx context.Context) error {
 	return unsubscribe[SwapNotification](ctx, s.sub, "swapUnsubscribe")
 }
 
+// UpdateParams change the subscription parameters. To prevent deadlocks, Avoid putting your UpdateParams() call in your Receive() loop
 func (s *SwapsSubscription) UpdateParams(ctx context.Context, params *SwapSubscribeParams) error {
 	data, err := json.Marshal(params)
 	if err != nil {

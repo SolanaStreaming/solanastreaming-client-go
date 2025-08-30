@@ -51,6 +51,13 @@ func (o *Client) SetLogger(logger *logrus.Logger) {
 	o.log = logger
 }
 
+func (o *Client) Close() error {
+	if o.conn != nil {
+		return o.conn.Close()
+	}
+	return nil
+}
+
 // Connect establishes a WebSocket connection to the Solana Streaming API and should always be called before any other methods.
 func (o *Client) Connect(ctx context.Context) error {
 	o.generalErr = nil

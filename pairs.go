@@ -49,10 +49,12 @@ func (s *NewPairsSubscription) Receive(ctx context.Context) (NewPairNotification
 	return receive[NewPairNotification](ctx, s.sub)
 }
 
+// Unsubscribe from the new pair notifications. To prevent deadlocks, Avoid putting your Unsubscribe() call in your Receive() loop
 func (s *NewPairsSubscription) Unsubscribe(ctx context.Context) error {
 	return unsubscribe[NewPairNotification](ctx, s.sub, "newPairUnsubscribe")
 }
 
+// UpdateParams change the subscription parameters. To prevent deadlocks, Avoid putting your UpdateParams() call in your Receive() loop
 func (s *NewPairsSubscription) UpdateParams(ctx context.Context, params *NewPairSubscribeParams) error {
 	data, err := json.Marshal(params)
 	if err != nil {

@@ -9,7 +9,6 @@ import (
 type subscription[T any] struct {
 	ID       uint
 	messages chan *wireMessage
-	err      chan error
 	client   *Client
 }
 
@@ -21,9 +20,10 @@ func receive[T any](ctx context.Context, sub subscription[T]) (T, error) {
 	select {
 	case <-ctx.Done():
 		return value, ctx.Err()
-	case err := <-sub.err:
-		return value, err
-	case v := <-sub.messages:
+	case v, open := <-sub.messages:
+		if !open {
+			return value, ErrSubscriptionClosed
+		}
 		if v.Params == nil {
 			return value, fmt.Errorf("received nil params in message: %v", v)
 		}
@@ -52,7 +52,6 @@ func unsubscribe[T any](ctx context.Context, sub subscription[T], method string)
 	}
 
 	close(sub.messages)
-	close(sub.err)
 
 	return nil
 }
@@ -83,9 +82,6 @@ func updateParams[T any](ctx context.Context, sub subscription[T], params *json.
 		// o.log.Errorf("solana wss error: %d %s", val.Error.Code, val.Error.Message)
 		return fmt.Errorf("solana wss error: %d %s", response.Error.Code, response.Error.Message)
 	}
-
-	close(sub.messages)
-	close(sub.err)
 
 	return nil
 }
