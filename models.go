@@ -100,7 +100,7 @@ type Swap struct {
 	QuoteTokenMint      solana.PublicKey `json:"quoteTokenMint"`      // The token being traded for and what the price is quoted in. Note: this is usually wrapped sol.
 	WalletAccount       solana.PublicKey `json:"walletAccount"`       // The wallet in the swap thats not the pool.
 	QuotePrice          *big.Float       `json:"quotePrice"`          // The execution price of the swap. This field is calculated as the quoteAmount divided by the baseAmount.
-	USDValue            float64          `json:"usdValue"`            // The value of the swap in USD.
+	USDValue            *float64         `json:"usdValue"`            // The value of the swap in USD.
 	BaseAmount          string           `json:"baseAmount"`          // The amount of base token traded in the swap
 	SwapType            string           `json:"swapType"`            // The type of swap (buy/sell)
 	QuoteTokenLiquidity string           `json:"quoteTokenLiquidity"` // (Beta Testing) The amount of quote token in the liquidity pool. This is not always available and could be an empty string.
