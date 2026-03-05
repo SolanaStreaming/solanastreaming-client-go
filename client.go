@@ -214,3 +214,10 @@ func randRequestID() int {
 	requestID, _ := rand.Int(rand.Reader, big.NewInt(1000000))
 	return int(requestID.Int64()) + 1
 }
+
+// StartSimulation is only used when connecting to a local test setup. See solanastreaming-cli for simulation details.
+func (c *Client) StartSimulation(ctx context.Context) error {
+	return c.sendMessage(wireMessage{
+		Method: "startSimulation",
+	})
+}

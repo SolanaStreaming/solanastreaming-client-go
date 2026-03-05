@@ -82,10 +82,10 @@ type TokenInfo struct {
 }
 
 type TokenMetaData struct {
-	Name    string       `json:"name"`
-	Symbol  string       `json:"symbol"`
-	Logo    string       `json:"logo"`
-	Socials TokenSocials `json:"socials"`
+	Name    string        `json:"name"`
+	Symbol  string        `json:"symbol"`
+	Logo    string        `json:"logo"`
+	Socials *TokenSocials `json:"socials"`
 }
 type TokenSocials struct {
 	Website  string `json:"website"`

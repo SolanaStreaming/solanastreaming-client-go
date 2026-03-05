@@ -115,8 +115,8 @@ func (o *Client) subscribe(ctx context.Context, method string, params *json.RawM
 	}
 
 	// success: get subscription id from response and retup receiver
-	// todo: potential issue here is we setup receive after sending message we could miss a few messages?
-	receiverChan := make(chan *wireMessage, 1)
+	// todo: minor potential issue here is we setup receive after sending message we could miss a few messages?
+	receiverChan := make(chan *wireMessage, 1000) // internal buffer larger so we can still recive responses to sync messages while processing subscription messages
 	o.lock.Lock()
 	receiverKey := receiver{
 		Type:  receiverTypeBySubscriptionID,
